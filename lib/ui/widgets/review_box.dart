@@ -1,5 +1,7 @@
 import 'package:bahaa_app/utils/base/colors.dart';
+import 'package:bahaa_app/utils/base/icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ReviewBox extends StatelessWidget {
@@ -42,7 +44,7 @@ class ReviewBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Row(
                 children: [
-                  for (int i = 0; i < rate; i++) const Icon(Icons.star),
+                  for (int i = 0; i < rate; i++) SvgPicture.asset(MyIcons.starFull),
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
-import 'package:bahaa_app/controller/category.dart';
 import 'package:bahaa_app/ui/base/drawer.dart';
+import 'package:bahaa_app/ui/base/nav_bar.dart';
 import 'package:bahaa_app/ui/screens/home/institute.dart';
 import 'package:bahaa_app/ui/screens/home/schools.dart';
 import 'package:bahaa_app/ui/screens/home/watad.dart';
@@ -18,9 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-
-  final ctrl = Get.lazyPut(() => CategoryController());
+  const HomeScreen({Key? key}) : super(key: key);
 
   static final _images = [
     "https://i.pinimg.com/736x/c9/1c/8b/c91c8bdcded1a045ab2e9515584d9456.jpg",
@@ -188,7 +186,9 @@ class HomeScreen extends StatelessWidget {
                   child: FloatingActionButton.extended(
                     heroTag: "977",
                     backgroundColor: MyColors.paigeC9F,
-                    onPressed: () {},
+                    onPressed: () {
+                      navBarController.index = 1;
+                    },
                     label: const Text(
                       "تصفح المزيد",
                       style: TextStyle(

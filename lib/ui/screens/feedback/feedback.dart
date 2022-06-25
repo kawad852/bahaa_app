@@ -1,11 +1,14 @@
+import 'package:bahaa_app/ui/base/drawer.dart';
 import 'package:bahaa_app/ui/widgets/custom_elevated_button.dart';
 import 'package:bahaa_app/ui/widgets/review_box.dart';
+import 'package:bahaa_app/ui/widgets/review_text_field.dart';
 import 'package:bahaa_app/utils/app_constants.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:bahaa_app/utils/base/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class FeedBackScreen extends StatelessWidget {
   const FeedBackScreen({Key? key}) : super(key: key);
@@ -34,6 +37,7 @@ class FeedBackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const BaseDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -62,7 +66,28 @@ class FeedBackScreen extends StatelessWidget {
                   onRatingUpdate: (rating) {},
                 ),
               ),
-              const CustomField(),
+              CustomField(
+                height: 80,
+                maxLines: 1,
+                hintText: "الإسم",
+                icon: FloatingActionButton(
+                  onPressed: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    Get.defaultDialog();
+                  },
+                  backgroundColor: MyColors.blue3FA,
+                  child: const Icon(
+                    Icons.image,
+                    color: MyColors.text,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const CustomField(
+                height: 210,
+                maxLines: 6,
+                hintText: "أكتب رأيك هنا",
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 child: CustomElevatedButton(
@@ -85,48 +110,6 @@ class FeedBackScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomField extends StatelessWidget {
-  const CustomField({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 210,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                MyColors.blue3FA,
-                MyColors.paigeFDC,
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: TextField(
-            maxLines: 6,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: MyColors.scaffold,
-              constraints: const BoxConstraints(maxHeight: 200),
-              hintText: "أكتب رأيك هنا",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

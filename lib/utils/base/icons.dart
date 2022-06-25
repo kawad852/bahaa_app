@@ -17,4 +17,5 @@ class MyIcons {
   static const String starFull = "${_path}star_full.svg";
   static const String starHalf = "${_path}star_half.svg";
   static const String starEmpty = "${_path}star_empty.svg";
+  static const String arrowUp = "${_path}arrow-up.svg.svg";
 }

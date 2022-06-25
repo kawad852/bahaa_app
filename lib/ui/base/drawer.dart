@@ -1,4 +1,3 @@
-import 'package:bahaa_app/ui/widgets/custom_icon_elevated_button.dart';
 import 'package:bahaa_app/utils/app_constants.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:bahaa_app/utils/base/icons.dart';
@@ -12,6 +11,23 @@ class BaseDrawer extends StatelessWidget {
 
   static const _info = [
     {
+      "title": "الرئيسية",
+      //TODO: fix color
+      "icon": MyIcons.home,
+    },
+    {
+      "title": "آراء الطلاب",
+      "icon": MyIcons.feedback,
+    },
+    {
+      "title": "بطاقة موقع وتد",
+      "icon": MyIcons.card,
+    },
+    {
+      "title": "الأمتحانات المحوسبة",
+      "icon": MyIcons.exam,
+    },
+    {
       "title": "تواصل معنا",
       "icon": MyIcons.phone,
     },
@@ -20,11 +36,6 @@ class BaseDrawer extends StatelessWidget {
       "icon": MyIcons.security,
     },
   ];
-
-  static void _launchUrl(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) throw 'حدث خطأ ما';
-  }
 
   static const _social = [
     {
@@ -44,6 +55,11 @@ class BaseDrawer extends StatelessWidget {
       "url": AppConstants.youtubeUrl,
     },
   ];
+
+  static void _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) throw 'حدث خطأ ما';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +101,14 @@ class BaseDrawer extends StatelessWidget {
           ..._info.map((element) {
             return ListTile(
               onTap: () {},
-              leading: SvgPicture.asset(element['icon'].toString()),
+              leading: SvgPicture.asset(
+                element['icon'].toString(),
+                color: MyColors.text,
+              ),
               title: Text(element['title'].toString()),
             );
           }).toList(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Row(
@@ -125,15 +145,6 @@ class BaseDrawer extends StatelessWidget {
                   ),
                 );
               }).toList(),
-            ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: CustomIconElevatedButton(
-              onTap: () {},
-              title: "تسجل الخروج",
-              icon: MyIcons.logout,
             ),
           ),
         ],

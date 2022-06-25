@@ -8,4 +8,6 @@ class MyImages {
   static const String instagram = "${_path}instagram.png";
   static const String whatsapp = "${_path}whatsapp.png";
   static const String youtube = "${_path}youtube.png";
+  static const String chem = "${_path}Asset 1.png";
+  static const String chem2 = "${_path}Asset 3.png";
 }

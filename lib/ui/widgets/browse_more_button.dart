@@ -1,4 +1,6 @@
+import 'package:bahaa_app/ui/screens/home/top_students.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BrowseMoreButton extends StatelessWidget {
   const BrowseMoreButton({
@@ -19,7 +21,9 @@ class BrowseMoreButton extends StatelessWidget {
                 ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const PeriodicTableScreen());
+            },
             child: const Text("تصفح المزيد"),
           ),
         ],

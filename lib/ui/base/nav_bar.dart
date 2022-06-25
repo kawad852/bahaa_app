@@ -1,3 +1,4 @@
+import 'package:bahaa_app/ui/screens/feedback/feedback.dart';
 import 'package:bahaa_app/ui/screens/home/home.dart';
 import 'package:bahaa_app/ui/widgets/custom_nav_bar_button.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
@@ -18,9 +19,17 @@ class BaseNavBar extends StatefulWidget {
 class _BaseNavBarState extends State<BaseNavBar> {
   Color _toggleColor(int index) {
     if (navBarController.index == index) {
-      return BaseColors.primary;
+      if (index == 0) {
+        return MyColors.primary;
+      } else if (index == 1) {
+        return MyColors.blueAFF;
+      } else if (index == 2) {
+        return MyColors.green410;
+      } else {
+        return MyColors.purple0CB;
+      }
     } else {
-      return BaseColors.grey5B5;
+      return MyColors.grey5B5;
     }
   }
 
@@ -28,28 +37,28 @@ class _BaseNavBarState extends State<BaseNavBar> {
     return [
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
-          icon: BaseIcons.home,
+          icon: MyIcons.home,
           title: "الرئيسية",
           color: _toggleColor(0),
         ),
       ),
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
-          icon: BaseIcons.feedback,
+          icon: MyIcons.feedback,
           title: "الآراء",
           color: _toggleColor(1),
         ),
       ),
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
-          icon: BaseIcons.card,
+          icon: MyIcons.card,
           title: "البطاقة",
           color: _toggleColor(2),
         ),
       ),
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
-          icon: BaseIcons.exam,
+          icon: MyIcons.exam,
           title: "الأمتحانات",
           color: _toggleColor(3),
         ),
@@ -60,7 +69,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
   List<Widget> _buildScreens() {
     return [
       HomeScreen(),
-      HomeScreen(),
+      const FeedBackScreen(),
       HomeScreen(),
       HomeScreen(),
     ];
@@ -81,9 +90,12 @@ class _BaseNavBarState extends State<BaseNavBar> {
       context,
       controller: navBarController,
       screens: _buildScreens(),
+      onItemSelected: (value) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: BaseColors.scaffold, // Default is Colors.white.
+      backgroundColor: MyColors.scaffold, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
@@ -91,7 +103,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
       decoration: const NavBarDecoration(
         border: Border(
           top: BorderSide(
-            color: BaseColors.grey5B5,
+            color: MyColors.grey5B5,
           ),
         ),
       ),

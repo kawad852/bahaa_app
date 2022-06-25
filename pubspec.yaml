@@ -45,6 +45,8 @@ dependencies:
   flutter_overlay_loader: ^2.0.0
   carousel_slider: ^4.1.1
   cached_network_image: ^3.2.1
+  url_launcher: ^6.1.4
+  flutter_rating_bar: ^4.0.1
 
 #  firebase_core: ^1.17.1
 #  firebase_auth: ^3.3.19

@@ -1,5 +1,8 @@
 import 'package:bahaa_app/controller/category.dart';
 import 'package:bahaa_app/ui/base/drawer.dart';
+import 'package:bahaa_app/ui/screens/home/institute.dart';
+import 'package:bahaa_app/ui/screens/home/schools.dart';
+import 'package:bahaa_app/ui/screens/home/watad.dart';
 import 'package:bahaa_app/ui/widgets/browse_more_button.dart';
 import 'package:bahaa_app/ui/widgets/custom_elevated_button.dart';
 import 'package:bahaa_app/ui/widgets/custom_outlined_button.dart';
@@ -100,7 +103,9 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                 child: CustomElevatedButton(
                   title: "موقع وتد التعليمي",
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const WatadScreen());
+                  },
                 ),
               ),
               Padding(
@@ -110,13 +115,17 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: CustomOutlinedButton(
                         title: "المدارس",
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const SchoolsScreen());
+                        },
                       ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: CustomOutlinedButton(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const InstituteScreen());
+                        },
                         title: 'المراكز الثقافية',
                       ),
                     ),
@@ -154,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                 child: Text(
                   "آراء الطلاب",
                   style: Theme.of(context).textTheme.headline5!.copyWith(
@@ -177,12 +186,13 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Center(
                   child: FloatingActionButton.extended(
-                    backgroundColor: BaseColors.paigeC9F,
+                    heroTag: "977",
+                    backgroundColor: MyColors.paigeC9F,
                     onPressed: () {},
                     label: const Text(
-                      "انشر رأيك",
+                      "تصفح المزيد",
                       style: TextStyle(
-                        color: BaseColors.text,
+                        color: MyColors.text,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

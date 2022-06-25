@@ -19,7 +19,7 @@ class DrawerButton extends StatelessWidget {
           },
           icon: const Icon(
             FontAwesomeIcons.barsStaggered,
-            color: BaseColors.text,
+            color: MyColors.text,
           ),
         ),
       ),

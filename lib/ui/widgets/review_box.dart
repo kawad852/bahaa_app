@@ -47,10 +47,11 @@ class ReviewBox extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: Get.width - 110,
+              //TODO: make responsive
+              width: Get.width - 150,
               child: Text(
                 review,
-                style: TextStyle(color: BaseColors.greyC6C),
+                style: const TextStyle(color: MyColors.greyC6C),
               ),
             ),
           ],

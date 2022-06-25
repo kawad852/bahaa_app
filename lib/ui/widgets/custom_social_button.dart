@@ -32,7 +32,7 @@ class CustomSocialButton extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: isGoogle
                 ? SvgPicture.asset(
-                    BaseIcons.google,
+                    MyIcons.google,
                     height: 35,
                   )
                 : Icon(icon, color: Colors.white, size: 35),

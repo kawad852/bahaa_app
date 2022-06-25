@@ -50,7 +50,7 @@ class SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: [
                 Image.asset(
-                  BaseImages.logo,
+                  MyImages.logo,
                   height: 150,
                 ),
                 const SizedBox(height: 20),
@@ -124,7 +124,7 @@ class SignInScreenState extends State<SignInScreen> {
                     ),
                     CustomSocialButton(
                       icon: FontAwesomeIcons.facebookF,
-                      color: BaseColors.facebook,
+                      color: MyColors.facebook,
                       onTap: () {},
                     ),
                     if (Platform.isIOS)

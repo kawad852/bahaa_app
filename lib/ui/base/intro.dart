@@ -15,7 +15,7 @@ class IntroScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(BaseImages.intro),
+            Image.asset(MyImages.intro),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
@@ -35,7 +35,7 @@ class IntroScreen extends StatelessWidget {
                   MySharedPreferences.isPassedIntro = true;
                 },
                 child: Image.asset(
-                  BaseImages.introButton,
+                  MyImages.introButton,
                 ),
               ),
             ),

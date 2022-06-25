@@ -2,7 +2,7 @@ import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String label;
+  final String? label;
   final String? hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -22,7 +22,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
     this.hintText,
-    required this.label,
+    this.label,
     this.controller,
     this.validator,
     this.obscureText = false,
@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
-        label: Text(label),
+        label: label == null ? null : Text(label!),
         hintText: hintText,
         hintStyle: hintStyle,
         labelStyle: labelStyle,
@@ -65,15 +65,15 @@ class CustomTextField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(color: BaseColors.primary),
+          borderSide: const BorderSide(color: MyColors.primary),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(color: BaseColors.primary),
+          borderSide: const BorderSide(color: MyColors.primary),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(color: BaseColors.primary),
+          borderSide: const BorderSide(color: MyColors.primary),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),

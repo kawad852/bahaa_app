@@ -1,5 +1,7 @@
+import 'package:bahaa_app/ui/screens/home/display_image_screen.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TeacherBox extends StatelessWidget {
   const TeacherBox({Key? key}) : super(key: key);
@@ -20,8 +22,8 @@ class TeacherBox extends StatelessWidget {
               begin: Alignment.centerLeft,
               end: Alignment.bottomRight,
               colors: [
-                BaseColors.blue3FA,
-                BaseColors.paigeFDC,
+                MyColors.blue3FA,
+                MyColors.paigeFDC,
               ],
             ),
           ),
@@ -30,10 +32,20 @@ class TeacherBox extends StatelessWidget {
           top: 30,
           child: Column(
             children: [
-              const CircleAvatar(
-                radius: 65,
-                backgroundImage: NetworkImage(
-                  "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+              Hero(
+                tag: "885",
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      () => const DisplayImageScreen(image: "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg"),
+                    );
+                  },
+                  child: const CircleAvatar(
+                    radius: 65,
+                    backgroundImage: NetworkImage(
+                      "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -47,7 +59,7 @@ class TeacherBox extends StatelessWidget {
               ),
               const Text(
                 "مدرس مادة الكيمياء",
-                style: TextStyle(color: BaseColors.grey565),
+                style: TextStyle(color: MyColors.grey565),
               ),
             ],
           ),

@@ -16,9 +16,9 @@ class CustomStudentGradeBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: BaseColors.paige3DA,
+        color: MyColors.paige3DA,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: BaseColors.paige272),
+        border: Border.all(color: MyColors.paige272),
       ),
       child: Column(
         children: [
@@ -30,7 +30,7 @@ class CustomStudentGradeBox extends StatelessWidget {
           Text(
             name,
             style: Theme.of(context).textTheme.caption!.copyWith(
-                  color: BaseColors.grey989,
+                  color: MyColors.grey989,
                   fontWeight: FontWeight.w400,
                 ),
           ),

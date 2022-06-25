@@ -22,8 +22,8 @@ class CustomElevatedButton extends StatelessWidget {
           begin: Alignment.centerLeft,
           end: Alignment.bottomRight,
           colors: [
-            BaseColors.blue3FA,
-            BaseColors.paigeFDC,
+            MyColors.blue3FA,
+            MyColors.paigeFDC,
           ],
         ),
       ),

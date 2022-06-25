@@ -13,14 +13,6 @@ class CustomNavBaaButton extends StatelessWidget {
     required this.color,
   }) : super(key: key);
 
-  static Color _toggleColor(bool isChosen) {
-    if (isChosen) {
-      return Colors.white.withOpacity(0.19);
-    } else {
-      return Colors.transparent;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(

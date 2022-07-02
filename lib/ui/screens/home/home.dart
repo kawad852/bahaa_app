@@ -12,7 +12,7 @@ import 'package:bahaa_app/ui/widgets/student_grade_box.dart';
 import 'package:bahaa_app/ui/widgets/teacher_box.dart';
 import 'package:bahaa_app/utils/app_constants.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bahaa_app/utils/base/images.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,31 +21,59 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static final _images = [
-    "https://i.pinimg.com/736x/c9/1c/8b/c91c8bdcded1a045ab2e9515584d9456.jpg",
-    "https://i.pinimg.com/736x/c9/1c/8b/c91c8bdcded1a045ab2e9515584d9456.jpg",
-    "https://i.pinimg.com/736x/c9/1c/8b/c91c8bdcded1a045ab2e9515584d9456.jpg",
-    "https://i.pinimg.com/736x/c9/1c/8b/c91c8bdcded1a045ab2e9515584d9456.jpg",
-    "https://i.pinimg.com/736x/c9/1c/8b/c91c8bdcded1a045ab2e9515584d9456.jpg",
+    MyImages.logo,
+    MyImages.logo,
+    MyImages.logo,
+  ];
+
+  static final _topStudents = [
+    {
+      "name": "خالد عوض",
+      "grade": "990.2",
+      "image": "2",
+    },
+    {
+      "name": "خالد عوض",
+      "grade": "990.2",
+      "image": "9",
+    },
+    {
+      "name": "خالد عوض",
+      "grade": "99.2",
+      "image": "4",
+    },
+    {
+      "name": "خالد عوض",
+      "grade": "99.2",
+      "image": "11",
+    },
+    {
+      "name": "خالد عوض",
+      "grade": "99.2",
+      "image": "4",
+    },
+    {
+      "name": "خالد عوض",
+      "grade": "99.2",
+      "image": "6",
+    },
   ];
 
   static final _reviews = [
     {
       "name": "خالد عوض",
-      "rate": 4,
       "review": AppConstants.review1,
-      "image": "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+      "image": "2",
     },
     {
-      "name": "خالد عوض",
-      "rate": 5,
+      "name": "رهف",
       "review": AppConstants.review2,
-      "image": "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+      "image": "7",
     },
     {
       "name": "خالد عوض",
-      "rate": 3,
       "review": AppConstants.review3,
-      "image": "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+      "image": "1",
     },
   ];
 
@@ -90,10 +118,10 @@ class HomeScreen extends StatelessWidget {
                   childAspectRatio: 0.8,
                 ),
                 itemBuilder: (context, index) {
-                  return const CustomStudentGradeBox(
-                    name: 'محمد حسام',
-                    grade: '99.2',
-                    image: "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+                  return CustomStudentGradeBox(
+                    name: _topStudents[index]["name"].toString(),
+                    grade: _topStudents[index]["grade"].toString(),
+                    image: _topStudents[index]["image"].toString(),
                   );
                 },
               ),
@@ -141,19 +169,14 @@ class HomeScreen extends StatelessWidget {
                   items: _images.map((i) {
                     return Builder(
                       builder: (BuildContext context) {
-                        return CachedNetworkImage(
-                          imageUrl: i,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            image: DecorationImage(
+                              image: AssetImage(i),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
                         );
                       },
                     );
@@ -174,9 +197,8 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: ReviewBox(
                     name: element["name"].toString(),
-                    image: element["image"].toString(),
                     review: element["review"].toString(),
-                    rate: element["rate"] as int,
+                    image: element["image"].toString(),
                   ),
                 );
               }).toList(),

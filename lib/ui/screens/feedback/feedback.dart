@@ -2,44 +2,89 @@ import 'package:bahaa_app/ui/base/drawer.dart';
 import 'package:bahaa_app/ui/widgets/custom_elevated_button.dart';
 import 'package:bahaa_app/ui/widgets/review_box.dart';
 import 'package:bahaa_app/ui/widgets/review_text_field.dart';
-import 'package:bahaa_app/utils/app_constants.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
-import 'package:bahaa_app/utils/base/icons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterfire_ui/firestore.dart';
 import 'package:get/get.dart';
 
-class FeedBackScreen extends StatelessWidget {
+class FeedBackScreen extends StatefulWidget {
   const FeedBackScreen({Key? key}) : super(key: key);
 
-  static final _reviews = [
-    {
-      "name": "خالد عوض",
-      "rate": 4,
-      "review": AppConstants.review1,
-      "image": "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
-    },
-    {
-      "name": "خالد عوض",
-      "rate": 5,
-      "review": AppConstants.review2,
-      "image": "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
-    },
-    {
-      "name": "خالد عوض",
-      "rate": 3,
-      "review": AppConstants.review3,
-      "image": "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
-    },
-  ];
+  @override
+  State<FeedBackScreen> createState() => _FeedBackScreenState();
+}
+
+class _FeedBackScreenState extends State<FeedBackScreen> {
+  late TextEditingController nameCtrl;
+  late TextEditingController rateCtrl;
+  late TextEditingController reviewCtrl;
+  late ScrollController _scrollController;
+  String? chosenImage;
+
+  static final _collection = FirebaseFirestore.instance.collection("reviews");
+
+  void _showDialog() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Get.defaultDialog(
+      title: "الصورة",
+      content: Wrap(
+        runSpacing: 5,
+        spacing: 5,
+        children: List.generate(
+          12,
+          (index) => GestureDetector(
+            onTap: () {
+              setState(() {
+                chosenImage = index.toString();
+              });
+              Get.back();
+            },
+            child: CircleAvatar(
+              backgroundColor: index < 6 ? MyColors.imageGreen : MyColors.imagePink,
+              radius: 50,
+              child: SvgPicture.asset("assets/avatars/$index.svg"),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    nameCtrl = TextEditingController();
+    rateCtrl = TextEditingController();
+    reviewCtrl = TextEditingController();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      // setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameCtrl.dispose();
+    rateCtrl.dispose();
+    reviewCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(
+          Icons.arrow_upward,
+        ),
+      ),
       drawer: const BaseDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: _scrollController,
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
@@ -49,41 +94,37 @@ class FeedBackScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 15),
-                child: RatingBar(
-                  minRating: 1,
-                  initialRating: 3,
-                  direction: Axis.horizontal,
-                  allowHalfRating: false,
-                  itemCount: 5,
-                  ratingWidget: RatingWidget(
-                    full: SvgPicture.asset(MyIcons.starFull),
-                    half: SvgPicture.asset(MyIcons.starHalf),
-                    empty: SvgPicture.asset(MyIcons.starEmpty),
-                  ),
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  onRatingUpdate: (rating) {},
-                ),
-              ),
+              const SizedBox(height: 20),
               CustomField(
+                controller: nameCtrl,
                 height: 80,
                 maxLines: 1,
                 hintText: "الإسم",
-                icon: FloatingActionButton(
-                  onPressed: () {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    Get.defaultDialog();
-                  },
-                  backgroundColor: MyColors.blue3FA,
-                  child: const Icon(
-                    Icons.image,
-                    color: MyColors.text,
-                  ),
-                ),
+                icon: chosenImage == null
+                    ? FloatingActionButton(
+                        onPressed: () {
+                          _showDialog();
+                        },
+                        backgroundColor: MyColors.blue3FA,
+                        child: const Icon(
+                          Icons.image,
+                          color: MyColors.text,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          _showDialog();
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: MyColors.blue3FA,
+                          child: SvgPicture.asset("assets/avatars/$chosenImage.svg"),
+                        ),
+                      ),
               ),
               const SizedBox(height: 8),
-              const CustomField(
+              CustomField(
+                controller: reviewCtrl,
                 height: 210,
                 maxLines: 6,
                 hintText: "أكتب رأيك هنا",
@@ -91,21 +132,76 @@ class FeedBackScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 child: CustomElevatedButton(
-                  onTap: () {},
+                  onTap: () {
+                    if (nameCtrl.text.isEmpty || reviewCtrl.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "يجب كتابة إسمك ورأيك في الحقول",
+                          ),
+                        ),
+                      );
+                    } else {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      _collection.add({
+                        "name": nameCtrl.text,
+                        "review": reviewCtrl.text,
+                        "image": chosenImage,
+                        "approval": "0",
+                        "date": DateTime.now(),
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "تم إرسال التقييم",
+                          ),
+                        ),
+                      );
+                      nameCtrl.clear();
+                      reviewCtrl.clear();
+                    }
+                  },
                   title: "نشر",
                 ),
               ),
-              ..._reviews.map((element) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: ReviewBox(
-                    name: element["name"].toString(),
-                    image: element["image"].toString(),
-                    review: element["review"].toString(),
-                    rate: element["rate"] as int,
-                  ),
-                );
-              }).toList(),
+              const SizedBox(height: 20),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "آراء الطلاب",
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+              FirestoreQueryBuilder<Map<String, dynamic>>(
+                query: _collection.where("approval", isEqualTo: "1").orderBy("date", descending: true),
+                builder: (context, snapshot, _) {
+                  if (snapshot.isFetching) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong! ${snapshot.error}');
+                  }
+
+                  var data = snapshot.docs;
+                  return ListView.separated(
+                    padding: const EdgeInsets.only(top: 20),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: data.length,
+                    separatorBuilder: (context, index) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      return ReviewBox(
+                        name: data[index]["name"],
+                        review: data[index]["review"],
+                        image: data[index]["image"],
+                      );
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),

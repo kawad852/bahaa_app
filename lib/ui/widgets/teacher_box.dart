@@ -1,5 +1,6 @@
 import 'package:bahaa_app/ui/screens/home/display_image_screen.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
+import 'package:bahaa_app/utils/base/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,13 +38,13 @@ class TeacherBox extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     Get.to(
-                      () => const DisplayImageScreen(image: "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg"),
+                      () => const DisplayImageScreen(image: MyImages.logo),
                     );
                   },
                   child: const CircleAvatar(
                     radius: 65,
-                    backgroundImage: NetworkImage(
-                      "https://i.pinimg.com/originals/52/61/13/52611340f103ae8c2521b5213919c21d.jpg",
+                    backgroundImage: AssetImage(
+                      MyImages.logo,
                     ),
                   ),
                 ),

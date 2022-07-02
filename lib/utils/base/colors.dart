@@ -42,4 +42,9 @@ class MyColors {
   static const Color red87A = Color(0xFFFE887A);
 
   static const facebook = Color(0xFF4267B2);
+
+  //image background
+  static const imageBlue = Color(0xFFE5ECF9);
+  static const imageGreen = Color(0xFFE3F0DF);
+  static const imagePink = Color(0xFFFAE5E3);
 }

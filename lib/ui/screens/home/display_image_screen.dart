@@ -23,7 +23,7 @@ class DisplayImageScreen extends StatelessWidget {
             onTap: () {
               Get.back();
             },
-            child: Image.network(
+            child: Image.asset(
               image,
             ),
           ),

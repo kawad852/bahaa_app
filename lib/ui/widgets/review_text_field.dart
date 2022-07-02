@@ -7,13 +7,17 @@ class CustomField extends StatelessWidget {
   final double height;
   final String hintText;
   final Widget? icon;
+  final TextEditingController controller;
+  final TextInputType? keyboardType;
 
   const CustomField({
     Key? key,
-    required this.maxLines,
+    this.maxLines = 1,
     required this.height,
     required this.hintText,
     this.icon,
+    required this.controller,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -30,6 +34,8 @@ class CustomField extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(5, 5, icon == null ? 5 : 10, 5),
           child: TextField(
+            keyboardType: keyboardType,
+            controller: controller,
             maxLines: maxLines,
             decoration: InputDecoration(
               icon: icon,

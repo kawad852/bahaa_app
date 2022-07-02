@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "824467820593",
+    "project_id": "bahaa-app",
+    "storage_bucket": "bahaa-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824467820593:android:65ceeb5fb9cdfa26528510",
+        "android_client_info": {
+          "package_name": "com.example.bahaa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824467820593-ds6b6konlif3rlmjme6q5i6cv8lcqs7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwHf0W6EOXWn4m3AdTinFb8enzu5NeDqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824467820593-ds6b6konlif3rlmjme6q5i6cv8lcqs7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

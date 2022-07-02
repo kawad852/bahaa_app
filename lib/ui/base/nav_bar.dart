@@ -2,6 +2,7 @@ import 'package:bahaa_app/ui/screens/card/card.dart';
 import 'package:bahaa_app/ui/screens/exams/exams.dart';
 import 'package:bahaa_app/ui/screens/feedback/feedback.dart';
 import 'package:bahaa_app/ui/screens/home/home.dart';
+import 'package:bahaa_app/ui/screens/top_students/top_grades.dart';
 import 'package:bahaa_app/ui/widgets/custom_nav_bar_button.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:bahaa_app/utils/base/icons.dart';
@@ -24,8 +25,10 @@ class _BaseNavBarState extends State<BaseNavBar> {
       if (index == 0) {
         return MyColors.primary;
       } else if (index == 1) {
-        return MyColors.blueAFF;
+        return MyColors.green410;
       } else if (index == 2) {
+        return MyColors.blueAFF;
+      } else if (index == 3) {
         return MyColors.green410;
       } else {
         return MyColors.purple0CB;
@@ -46,23 +49,30 @@ class _BaseNavBarState extends State<BaseNavBar> {
       ),
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
+          icon: MyIcons.medal,
+          title: "الأوائل",
+          color: _toggleColor(1),
+        ),
+      ),
+      PersistentBottomNavBarItem(
+        icon: CustomNavBaaButton(
           icon: MyIcons.feedback,
           title: "الآراء",
-          color: _toggleColor(1),
+          color: _toggleColor(2),
         ),
       ),
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
           icon: MyIcons.card,
           title: "البطاقة",
-          color: _toggleColor(2),
+          color: _toggleColor(3),
         ),
       ),
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(
           icon: MyIcons.exam,
           title: "الأمتحانات",
-          color: _toggleColor(3),
+          color: _toggleColor(4),
         ),
       ),
     ];
@@ -71,6 +81,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
+      const TopGradesScreen(),
       const FeedBackScreen(),
       const CardScreen(),
       const ExamsScreen(),

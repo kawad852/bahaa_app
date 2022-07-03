@@ -70,16 +70,19 @@ class HomeScreen extends StatelessWidget {
       "name": "خالد عوض",
       "review": AppConstants.review1,
       "image": "2",
+      "color": "0",
     },
     {
       "name": "رهف",
       "review": AppConstants.review2,
       "image": "7",
+      "color": "1",
     },
     {
       "name": "خالد عوض",
       "review": AppConstants.review3,
       "image": "1",
+      "color": "2",
     },
   ];
 

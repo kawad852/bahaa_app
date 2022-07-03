@@ -1,4 +1,8 @@
+import 'package:bahaa_app/admin_panel/book_shops.dart';
+import 'package:bahaa_app/admin_panel/exams.dart';
+import 'package:bahaa_app/admin_panel/institutes.dart';
 import 'package:bahaa_app/admin_panel/reviews.dart';
+import 'package:bahaa_app/admin_panel/schools.dart';
 import 'package:bahaa_app/admin_panel/top_students.dart';
 import 'package:bahaa_app/utils/base/images.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
@@ -77,7 +81,7 @@ class _AdminPanelState extends State<AdminPanel> {
               ),
             ),
             // Will show on bottom of SideMenu when displayMode was SideMenuDisplayMode.open
-            footer: const Text('demo'),
+            footer: const Text('الرائع في الكيمياء'),
             // Notify when display mode changed
             onDisplayModeChanged: (mode) {},
             // List of SideMenuItem to show them on SideMenu
@@ -85,15 +89,21 @@ class _AdminPanelState extends State<AdminPanel> {
           ),
           Expanded(
             child: PageView.builder(
-              itemCount: 3,
+              itemCount: 6,
               controller: pageController,
               itemBuilder: (context, index) {
                 if (index == 0) {
-                  return const TopStudentsPanel();
+                  return const ReviewsPanel();
                 } else if (index == 1) {
                   return const TopStudentsPanel();
+                } else if (index == 2) {
+                  return const ExamsPanel();
+                } else if (index == 3) {
+                  return const InstitutesPanel();
+                } else if (index == 4) {
+                  return const BookShopsPanel();
                 } else {
-                  return const ReviewsPanel();
+                  return const SchoolsPanel();
                 }
               },
             ),

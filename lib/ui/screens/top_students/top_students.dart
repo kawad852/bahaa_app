@@ -18,7 +18,9 @@ class TopStudentsScreen extends StatelessWidget {
               const SizedBox(height: 15),
               Text(
                 "الطلاب الأوائل",
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headline4!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               FirestoreQueryBuilder<Map<String, dynamic>>(
                 query: _collection.orderBy("time", descending: true),

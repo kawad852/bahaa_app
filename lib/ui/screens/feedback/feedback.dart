@@ -24,6 +24,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
   late TextEditingController reviewCtrl;
   late ScrollController _scrollController;
   String? chosenImage;
+  bool isButtonShown = false;
 
   static final _collection = FirebaseFirestore.instance.collection("reviews");
 
@@ -66,7 +67,12 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
     reviewCtrl = TextEditingController();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      // setState(() {});
+      if (_scrollController.position.pixels > 50) {
+        isButtonShown = true;
+      } else {
+        isButtonShown = false;
+      }
+      setState(() {});
     });
     super.initState();
   }
@@ -82,12 +88,22 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(
-          Icons.arrow_upward,
-        ),
-      ),
+      floatingActionButton: isButtonShown
+          ? FloatingActionButton(
+              backgroundColor: MyColors.paigeC9F,
+              onPressed: () {
+                _scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.elasticOut,
+                );
+              },
+              child: const Icon(
+                Icons.arrow_upward,
+                color: MyColors.text,
+              ),
+            )
+          : const SizedBox.shrink(),
       drawer: const BaseDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -97,7 +113,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
             children: [
               Text(
                 "آراء الطلاب",
-                style: Theme.of(context).textTheme.headline6!.copyWith(
+                style: Theme.of(context).textTheme.headline4!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),

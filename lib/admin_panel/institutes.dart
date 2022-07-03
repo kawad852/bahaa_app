@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SchoolsPanel extends StatefulWidget {
-  const SchoolsPanel({Key? key}) : super(key: key);
+class InstitutesPanel extends StatefulWidget {
+  const InstitutesPanel({Key? key}) : super(key: key);
 
   @override
-  State<SchoolsPanel> createState() => _SchoolsPanelState();
+  State<InstitutesPanel> createState() => _InstitutesPanelState();
 }
 
-class _SchoolsPanelState extends State<SchoolsPanel> {
-  final _collection = FirebaseFirestore.instance.collection("schools");
+class _InstitutesPanelState extends State<InstitutesPanel> {
+  final _collection = FirebaseFirestore.instance.collection("institutes");
   late FocusNode _focusNode;
 
   final _fields = [
-    SchoolField(title: "إسم المدرسة", controller: TextEditingController()),
-    SchoolField(title: "العنوان", controller: TextEditingController()),
-    SchoolField(title: "خط الطول", controller: TextEditingController()),
-    SchoolField(title: "خط العرض", controller: TextEditingController()),
+    InstitutesField(title: "إسم المركز", controller: TextEditingController()),
+    InstitutesField(title: "العنوان", controller: TextEditingController()),
+    InstitutesField(title: "خط الطول", controller: TextEditingController()),
+    InstitutesField(title: "خط العرض", controller: TextEditingController()),
   ];
 
   void _clearFields() {
@@ -54,7 +54,7 @@ class _SchoolsPanelState extends State<SchoolsPanel> {
         child: Column(
           children: [
             Text(
-              "المدارس",
+              "المراكز",
               style: Theme.of(context).textTheme.headline3,
             ),
             ..._fields.map((element) {
@@ -104,9 +104,9 @@ class _SchoolsPanelState extends State<SchoolsPanel> {
   }
 }
 
-class SchoolField {
+class InstitutesField {
   final TextEditingController controller;
   final String title;
 
-  SchoolField({required this.title, required this.controller});
+  InstitutesField({required this.title, required this.controller});
 }

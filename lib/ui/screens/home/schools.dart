@@ -10,10 +10,9 @@ import 'package:flutterfire_ui/firestore.dart';
 class SchoolsScreen extends StatelessWidget {
   const SchoolsScreen({Key? key}) : super(key: key);
 
-  static const String description =
-      "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.";
+  static const String description = "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.";
 
-  static final _collection = FirebaseFirestore.instance.collection("المدارس");
+  static final _collection = FirebaseFirestore.instance.collection("schools");
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +55,14 @@ class SchoolsScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(
-                      data[index]["الاسم"],
+                      data[index]["name"],
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
-                      data[index]["العنوان"],
+                      data[index]["address"],
                       style: const TextStyle(
                         color: MyColors.grey181,
                       ),
@@ -75,8 +74,8 @@ class SchoolsScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                         onTap: () {
                           MapController.openMap(
-                            data[index]["الموقع"][0],
-                            data[index]["الموقع"][1],
+                            data[index]["longitude"],
+                            data[index]["latitude"],
                           );
                         },
                         child: Padding(

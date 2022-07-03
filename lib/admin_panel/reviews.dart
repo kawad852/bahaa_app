@@ -12,62 +12,84 @@ class ReviewsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: FirestoreQueryBuilder<Map<String, dynamic>>(
-          query: _collection.where("approval", isEqualTo: false).orderBy("time", descending: true),
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        child: Column(
+          children: [
+            Text(
+              "الآراء",
+              style: Theme.of(context).textTheme.headline3,
+            ),
+            FirestoreQueryBuilder<Map<String, dynamic>>(
+              query: _collection.where("approval", isEqualTo: false).orderBy("time", descending: true),
+              builder: (context, snapshot, _) {
+                if (snapshot.isFetching) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-            if (snapshot.hasError) {
-              return Text('Something went wrong! ${snapshot.error}');
-            }
+                if (snapshot.hasError) {
+                  return Text('Something went wrong! ${snapshot.error}');
+                }
 
-            var data = snapshot.docs;
-            return ListView.separated(
-              padding: const EdgeInsets.only(top: 20),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: data.length,
-              separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    ReviewBox(
-                      name: data[index]["name"],
-                      review: data[index]["review"],
-                      image: data[index]["image"],
-                      color: data[index]["color"],
+                var data = snapshot.docs;
+
+                if (data.isEmpty) {
+                  return Center(
+                    child: Text(
+                      "لا يوجد آراء معلقة",
+                      style: Theme.of(context).textTheme.headline4,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30),
-                      child: Row(
+                  );
+                }
+
+                return Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(top: 20),
+                    shrinkWrap: true,
+                    itemCount: data.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemBuilder: (context, index) {
+                      return Column(
                         children: [
-                          Expanded(
-                            child: CustomElevatedButton(
-                              onTap: () {
-                                _collection.doc(data[index].id).update({
-                                  "approval": true,
-                                });
-                              },
-                              title: "الموافقة",
-                            ),
+                          ReviewBox(
+                            name: data[index]["name"],
+                            review: data[index]["review"],
+                            image: data[index]["image"],
+                            color: data[index]["color"],
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: CustomElevatedButton(
-                              onTap: () {},
-                              title: "الرفض",
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: CustomElevatedButton(
+                                    onTap: () {
+                                      //TODO: delete
+                                      _collection.doc(data[index].id).update({
+                                        "approval": true,
+                                      });
+                                    },
+                                    title: "الموافقة",
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: CustomElevatedButton(
+                                    onTap: () {
+                                      _collection.doc(data[index].id).delete();
+                                    },
+                                    title: "الرفض",
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
+                          )
                         ],
-                      ),
-                    )
-                  ],
+                      );
+                    },
+                  ),
                 );
               },
-            );
-          },
+            ),
+          ],
         ),
       ),
     );

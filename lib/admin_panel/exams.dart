@@ -6,22 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SchoolsPanel extends StatefulWidget {
-  const SchoolsPanel({Key? key}) : super(key: key);
+class ExamsPanel extends StatefulWidget {
+  const ExamsPanel({Key? key}) : super(key: key);
 
   @override
-  State<SchoolsPanel> createState() => _SchoolsPanelState();
+  State<ExamsPanel> createState() => _ExamsPanelState();
 }
 
-class _SchoolsPanelState extends State<SchoolsPanel> {
-  final _collection = FirebaseFirestore.instance.collection("schools");
+class _ExamsPanelState extends State<ExamsPanel> {
+  final _collection = FirebaseFirestore.instance.collection("exams");
   late FocusNode _focusNode;
 
   final _fields = [
-    SchoolField(title: "إسم المدرسة", controller: TextEditingController()),
-    SchoolField(title: "العنوان", controller: TextEditingController()),
-    SchoolField(title: "خط الطول", controller: TextEditingController()),
-    SchoolField(title: "خط العرض", controller: TextEditingController()),
+    ExamsField(title: "العنوان", controller: TextEditingController()),
+    ExamsField(title: "التفاصيل", controller: TextEditingController()),
+    ExamsField(title: "الرابط", controller: TextEditingController()),
   ];
 
   void _clearFields() {
@@ -54,7 +53,7 @@ class _SchoolsPanelState extends State<SchoolsPanel> {
         child: Column(
           children: [
             Text(
-              "المدارس",
+              "الإمتحانات",
               style: Theme.of(context).textTheme.headline3,
             ),
             ..._fields.map((element) {
@@ -74,23 +73,21 @@ class _SchoolsPanelState extends State<SchoolsPanel> {
             ),
             CustomElevatedButton(
               onTap: () async {
-                var checkFields = _fields[0].controller.text.isEmpty || _fields[1].controller.text.isEmpty || _fields[2].controller.text.isEmpty || _fields[3].controller.text.isEmpty;
+                var checkFields = _fields[0].controller.text.isEmpty || _fields[1].controller.text.isEmpty || _fields[2].controller.text.isEmpty;
                 if (checkFields) {
                   Fluttertoast.showToast(msg: "جميع الحقول مطلوبة");
                   return;
                 } else {
                   Loader.show(context);
                   await _collection.add({
-                    "name": _fields[0].controller.text,
-                    "address": _fields[1].controller.text,
-                    "longitude": _fields[2].controller.text,
-                    "latitude": _fields[3].controller.text,
+                    "title": _fields[0].controller.text,
+                    "description": _fields[1].controller.text,
+                    "link": _fields[2].controller.text,
                     "time": DateTime.now(),
                   }).catchError((onError) {
                     MyErrorDialog.showErrorDialog(context);
                   });
                   _clearFields();
-
                   Loader.hide();
                   Fluttertoast.showToast(msg: "تم إضافة الطالب");
                 }
@@ -104,9 +101,9 @@ class _SchoolsPanelState extends State<SchoolsPanel> {
   }
 }
 
-class SchoolField {
+class ExamsField {
   final TextEditingController controller;
   final String title;
 
-  SchoolField({required this.title, required this.controller});
+  ExamsField({required this.title, required this.controller});
 }

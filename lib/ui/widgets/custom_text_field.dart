@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final FocusNode? focusNode;
+  final Function()? onTap;
+  final bool readOnly;
 
   const CustomTextField({
     Key? key,
@@ -20,6 +22,8 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.keyboardType,
     this.focusNode,
+    this.readOnly = false,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,8 @@ class CustomTextField extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(5, 5, icon == null ? 5 : 10, 5),
           child: TextField(
+            onTap: onTap,
+            readOnly: readOnly,
             focusNode: focusNode,
             keyboardType: keyboardType,
             controller: controller,

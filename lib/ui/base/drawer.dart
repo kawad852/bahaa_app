@@ -1,3 +1,4 @@
+import 'package:bahaa_app/ui/base/nav_bar.dart';
 import 'package:bahaa_app/utils/app_constants.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:bahaa_app/utils/base/icons.dart';
@@ -14,6 +15,10 @@ class BaseDrawer extends StatelessWidget {
       "title": "الرئيسية",
       //TODO: fix color
       "icon": MyIcons.home,
+    },
+    {
+      "title": "الطلاب الأوائل",
+      "icon": MyIcons.feedback,
     },
     {
       "title": "آراء الطلاب",
@@ -99,8 +104,37 @@ class BaseDrawer extends StatelessWidget {
             ),
           ),
           ..._info.map((element) {
+            final index = _info.indexOf(element);
             return ListTile(
-              onTap: () {},
+              onTap: () {
+                switch (index) {
+                  case 0:
+                    {
+                      navBarController.index = 0;
+                    }
+                    break;
+                  case 1:
+                    {
+                      navBarController.index = 1;
+                    }
+                    break;
+                  case 2:
+                    {
+                      navBarController.index = 2;
+                    }
+                    break;
+                  case 3:
+                    {
+                      navBarController.index = 3;
+                    }
+                    break;
+                  case 4:
+                    {
+                      navBarController.index = 4;
+                    }
+                    break;
+                }
+              },
               leading: SvgPicture.asset(
                 element['icon'].toString(),
                 color: MyColors.text,

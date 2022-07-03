@@ -2,7 +2,7 @@ import 'package:bahaa_app/ui/screens/card/card.dart';
 import 'package:bahaa_app/ui/screens/exams/exams.dart';
 import 'package:bahaa_app/ui/screens/feedback/feedback.dart';
 import 'package:bahaa_app/ui/screens/home/home.dart';
-import 'package:bahaa_app/ui/screens/top_students/top_grades.dart';
+import 'package:bahaa_app/ui/screens/top_students/top_students.dart';
 import 'package:bahaa_app/ui/widgets/custom_nav_bar_button.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:bahaa_app/utils/base/icons.dart';
@@ -81,7 +81,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
-      const TopGradesScreen(),
+      const TopStudentsScreen(),
       const FeedBackScreen(),
       const CardScreen(),
       const ExamsScreen(),

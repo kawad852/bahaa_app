@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
-class TopGradesScreen extends StatelessWidget {
-  const TopGradesScreen({Key? key}) : super(key: key);
+class TopStudentsScreen extends StatelessWidget {
+  const TopStudentsScreen({Key? key}) : super(key: key);
 
   static final _collection = FirebaseFirestore.instance.collection("top students");
 
@@ -21,7 +21,7 @@ class TopGradesScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline4,
               ),
               FirestoreQueryBuilder<Map<String, dynamic>>(
-                query: _collection.orderBy("date", descending: true),
+                query: _collection.orderBy("time", descending: true),
                 builder: (context, snapshot, _) {
                   if (snapshot.isFetching) {
                     return const Center(child: CircularProgressIndicator());
@@ -48,6 +48,7 @@ class TopGradesScreen extends StatelessWidget {
                         name: data[index]["name"],
                         grade: data[index]["grade"],
                         image: data[index]["image"],
+                        color: data[index]["color"],
                       );
                     },
                   );

@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:bahaa_app/ui/base/drawer.dart';
 import 'package:bahaa_app/ui/widgets/custom_elevated_button.dart';
+import 'package:bahaa_app/ui/widgets/custom_text_field.dart';
 import 'package:bahaa_app/ui/widgets/review_box.dart';
-import 'package:bahaa_app/ui/widgets/review_text_field.dart';
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +54,11 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
     );
   }
 
+  int _generateColorNum() {
+    int num = Random().nextInt(3);
+    return num;
+  }
+
   @override
   void initState() {
     nameCtrl = TextEditingController();
@@ -95,10 +102,9 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                     ),
               ),
               const SizedBox(height: 20),
-              CustomField(
+              CustomTextField(
                 controller: nameCtrl,
                 height: 80,
-                maxLines: 1,
                 hintText: "الإسم",
                 icon: chosenImage == null
                     ? FloatingActionButton(
@@ -123,7 +129,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                       ),
               ),
               const SizedBox(height: 8),
-              CustomField(
+              CustomTextField(
                 controller: reviewCtrl,
                 height: 210,
                 maxLines: 6,
@@ -141,14 +147,19 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                           ),
                         ),
                       );
+                      return;
+                    } else if (chosenImage == null) {
+                      _showDialog();
+                      return;
                     } else {
                       FocusManager.instance.primaryFocus?.unfocus();
                       _collection.add({
                         "name": nameCtrl.text,
                         "review": reviewCtrl.text,
                         "image": chosenImage,
-                        "approval": "0",
-                        "date": DateTime.now(),
+                        "approval": false,
+                        "color": _generateColorNum().toString(),
+                        "time": DateTime.now(),
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -175,7 +186,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                 ),
               ),
               FirestoreQueryBuilder<Map<String, dynamic>>(
-                query: _collection.where("approval", isEqualTo: "1").orderBy("date", descending: true),
+                query: _collection.where("approval", isEqualTo: true).orderBy("time", descending: true),
                 builder: (context, snapshot, _) {
                   if (snapshot.isFetching) {
                     return const Center(child: CircularProgressIndicator());
@@ -197,6 +208,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                         name: data[index]["name"],
                         review: data[index]["review"],
                         image: data[index]["image"],
+                        color: data[index]["color"],
                       );
                     },
                   );

@@ -31,31 +31,37 @@ class HomeScreen extends StatelessWidget {
       "name": "خالد عوض",
       "grade": "990.2",
       "image": "2",
+      "color": "0",
     },
     {
       "name": "خالد عوض",
       "grade": "990.2",
       "image": "9",
+      "color": "1",
     },
     {
       "name": "خالد عوض",
       "grade": "99.2",
       "image": "4",
+      "color": "2",
     },
     {
       "name": "خالد عوض",
       "grade": "99.2",
       "image": "11",
+      "color": "0",
     },
     {
       "name": "خالد عوض",
       "grade": "99.2",
       "image": "4",
+      "color": "1",
     },
     {
       "name": "خالد عوض",
       "grade": "99.2",
       "image": "6",
+      "color": "2",
     },
   ];
 
@@ -122,6 +128,7 @@ class HomeScreen extends StatelessWidget {
                     name: _topStudents[index]["name"].toString(),
                     grade: _topStudents[index]["grade"].toString(),
                     image: _topStudents[index]["image"].toString(),
+                    color: _topStudents[index]["color"].toString(),
                   );
                 },
               ),
@@ -199,6 +206,7 @@ class HomeScreen extends StatelessWidget {
                     name: element["name"].toString(),
                     review: element["review"].toString(),
                     image: element["image"].toString(),
+                    color: element["color"].toString(),
                   ),
                 );
               }).toList(),

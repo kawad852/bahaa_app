@@ -6,14 +6,14 @@ import 'package:flutterfire_ui/firestore.dart';
 
 class ReviewsPanel extends StatelessWidget {
   const ReviewsPanel({Key? key}) : super(key: key);
-  static final _collection = FirebaseFirestore.instance.collection("الآراء");
+  static final _collection = FirebaseFirestore.instance.collection("reviews");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: FirestoreQueryBuilder<Map<String, dynamic>>(
-          query: _collection.where("الموافقة", isEqualTo: "0").orderBy("الوقت", descending: true),
+          query: _collection.where("approval", isEqualTo: false).orderBy("time", descending: true),
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return const Center(child: CircularProgressIndicator());
@@ -36,7 +36,8 @@ class ReviewsPanel extends StatelessWidget {
                     ReviewBox(
                       name: data[index]["name"],
                       review: data[index]["review"],
-                      image: data[index]["gender"],
+                      image: data[index]["image"],
+                      color: data[index]["color"],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30),
@@ -45,8 +46,8 @@ class ReviewsPanel extends StatelessWidget {
                           Expanded(
                             child: CustomElevatedButton(
                               onTap: () {
-                                _collection.doc().update({
-                                  "approval": "1",
+                                _collection.doc(data[index].id).update({
+                                  "approval": true,
                                 });
                               },
                               title: "الموافقة",

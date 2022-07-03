@@ -1,5 +1,7 @@
+import 'dart:math';
+
 import 'package:bahaa_app/ui/widgets/custom_elevated_button.dart';
-import 'package:bahaa_app/ui/widgets/review_text_field.dart';
+import 'package:bahaa_app/ui/widgets/custom_text_field.dart';
 import 'package:bahaa_app/utils/my_error_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,18 +22,38 @@ class _TopStudentsPanelState extends State<TopStudentsPanel> {
   Gender? _gender;
   late TextEditingController nameCtrl;
   late TextEditingController gradeCtrl;
+  late FocusNode _focusNode;
+  final _random = Random();
 
   void _clearFields() {
     nameCtrl.clear();
     gradeCtrl.clear();
-    _gender = null;
-    setState(() {});
+    _focusNode.requestFocus();
+    setState(() {
+      _gender = null;
+    });
+  }
+
+  int _generateImageNum(String gender) {
+    if (gender == "male") {
+      var number = 0 + _random.nextInt(6 - 0);
+      return number;
+    } else {
+      var number = 6 + _random.nextInt(12 - 6);
+      return number;
+    }
+  }
+
+  int _generateColorNum() {
+    int num = _random.nextInt(3);
+    return num;
   }
 
   @override
   void initState() {
     nameCtrl = TextEditingController();
     gradeCtrl = TextEditingController();
+    _focusNode = FocusNode();
     super.initState();
   }
 
@@ -39,6 +61,7 @@ class _TopStudentsPanelState extends State<TopStudentsPanel> {
   void dispose() {
     nameCtrl.dispose();
     gradeCtrl.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -55,7 +78,8 @@ class _TopStudentsPanelState extends State<TopStudentsPanel> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: CustomField(
+              child: CustomTextField(
+                focusNode: _focusNode,
                 controller: nameCtrl,
                 hintText: "إسم الطالب",
                 height: 80,
@@ -63,7 +87,7 @@ class _TopStudentsPanelState extends State<TopStudentsPanel> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: CustomField(
+              child: CustomTextField(
                 keyboardType: TextInputType.number,
                 controller: gradeCtrl,
                 hintText: "المعدل",
@@ -106,14 +130,14 @@ class _TopStudentsPanelState extends State<TopStudentsPanel> {
                 await _collection.add({
                   "name": nameCtrl.text,
                   "grade": gradeCtrl.text,
-                  "gender": _gender!.name,
-                  "date": DateTime.now(),
+                  "image": _generateImageNum(_gender!.name).toString(),
+                  "time": DateTime.now(),
+                  "color": _generateColorNum().toString(),
                 }).catchError((onError) {
                   MyErrorDialog.showErrorDialog(context);
-                }).then((value) {
-                  Fluttertoast.showToast(msg: "تم إضافة الطالب");
-                  _clearFields();
                 });
+                Fluttertoast.showToast(msg: "تم إضافة الطالب");
+                _clearFields();
                 Loader.hide();
               },
             ),

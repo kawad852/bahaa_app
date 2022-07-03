@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,20 +6,20 @@ class CustomStudentGradeBox extends StatelessWidget {
   final String name;
   final String grade;
   final String image;
+  final String color;
 
   const CustomStudentGradeBox({
     Key? key,
     required this.name,
     required this.grade,
     required this.image,
+    required this.color,
   }) : super(key: key);
 
-  static Color _randomColor() {
-    Random random = Random();
-    int num = random.nextInt(3);
-    if (num == 0) {
+  static Color _getColor(String num) {
+    if (num == "0") {
       return MyColors.imageBlue;
-    } else if (num == 1) {
+    } else if (num == "1") {
       return MyColors.imageGreen;
     } else {
       return MyColors.imagePink;
@@ -40,7 +38,7 @@ class CustomStudentGradeBox extends StatelessWidget {
         children: [
           const Spacer(),
           CircleAvatar(
-            backgroundColor: _randomColor(),
+            backgroundColor: _getColor(color),
             child: SvgPicture.asset("assets/avatars/$image.svg"),
           ),
           const Spacer(),

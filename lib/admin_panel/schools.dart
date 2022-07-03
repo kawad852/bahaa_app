@@ -1,5 +1,5 @@
 import 'package:bahaa_app/ui/widgets/custom_elevated_button.dart';
-import 'package:bahaa_app/ui/widgets/review_text_field.dart';
+import 'package:bahaa_app/ui/widgets/custom_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +52,7 @@ class _SchoolAdminState extends State<SchoolAdmin> {
           ..._fields.map((element) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: CustomField(
+              child: CustomTextField(
                 controller: element["controller"],
                 hintText: element["title"],
                 height: 80,

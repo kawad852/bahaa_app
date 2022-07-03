@@ -1,3 +1,4 @@
+import 'package:bahaa_app/admin_panel/admin_panel.dart';
 import 'package:bahaa_app/translation/translation.dart';
 import 'package:bahaa_app/ui/base/intro.dart';
 import 'package:bahaa_app/ui/base/nav_bar.dart';
@@ -42,6 +43,10 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  Widget _adminPanel() {
+    return const AdminPanel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -55,8 +60,8 @@ class _MyAppState extends State<MyApp> {
       locale: const Locale("ar"),
       fallbackLocale: const Locale("ar"),
       theme: AppThemeData().materialTheme,
-      home: _toggleScreen(),
-      // home: const AdminPanel(),
+      // home: _toggleScreen(),
+      home: _adminPanel(),
     );
   }
 }

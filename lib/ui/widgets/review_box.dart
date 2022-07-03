@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bahaa_app/utils/base/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,42 +5,33 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ReviewBox extends StatelessWidget {
   final String name;
   final String review;
-  final String? image;
+  final String image;
+  final String color;
 
   const ReviewBox({
     Key? key,
     required this.name,
     required this.review,
     required this.image,
+    required this.color,
   }) : super(key: key);
 
-  static String _randomImage() {
-    Random random = Random();
-    int randomNumber = random.nextInt(3);
-    var image = "assets/avatars/$randomNumber.svg";
-    return image;
-  }
-
-  static Color _randomColor() {
-    Random random = Random();
-    int num = random.nextInt(3);
-    if (num == 0) {
-      return MyColors.imageBlue;
-    } else if (num == 1) {
-      return MyColors.imageGreen;
-    } else {
-      return MyColors.imagePink;
+  static Color? _getColor(String color) {
+    switch (color) {
+      case "0":
+        {
+          return MyColors.imageBlue;
+        }
+      case "1":
+        {
+          return MyColors.imageGreen;
+        }
+      case "2":
+        {
+          return MyColors.imagePink;
+        }
     }
-  }
-
-  static Color _getColor(int image) {
-    if (image < 4) {
-      return MyColors.imageBlue;
-    } else if (image < 8) {
-      return MyColors.imageGreen;
-    } else {
-      return MyColors.imagePink;
-    }
+    return null;
   }
 
   @override
@@ -54,11 +43,11 @@ class ReviewBox extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 27,
-            backgroundColor: image != null ? _getColor(int.parse(image!)) : _randomColor(),
+            backgroundColor: _getColor(color),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: SvgPicture.asset(
-                image != null ? "assets/avatars/$image.svg" : _randomImage(),
+                "assets/avatars/$image.svg",
                 height: 50,
               ),
             ),

@@ -14,6 +14,7 @@ class ReviewsPanel extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(height: 20),
             Text(
               "الآراء",
               style: Theme.of(context).textTheme.headline3,

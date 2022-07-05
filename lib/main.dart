@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: const Locale("ar"),
       theme: AppThemeData().materialTheme,
       // home: _toggleScreen(),
-      home: _adminPanel(),
+      // home: _adminPanel(),
     );
   }
 }

@@ -220,6 +220,9 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                     itemCount: data.length,
                     separatorBuilder: (context, index) => const SizedBox(height: 10),
                     itemBuilder: (context, index) {
+                      if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                        snapshot.fetchMore();
+                      }
                       return ReviewBox(
                         name: data[index]["name"],
                         review: data[index]["review"],

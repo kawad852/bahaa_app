@@ -43,13 +43,16 @@ class _CardScreenState extends State<CardScreen> {
   ];
 
   Widget _shimmer() {
-    return SizedBox(
-      width: 200.0,
-      height: 100.0,
-      child: Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
-        child: const SizedBox.shrink(),
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: Container(
+        width: double.infinity,
+        height: 75.0,
+        decoration: BoxDecoration(
+          color: Colors.orange,
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }
@@ -156,6 +159,9 @@ class _CardScreenState extends State<CardScreen> {
                         children: List.generate(
                           data.length,
                           (index) {
+                            if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                              snapshot.fetchMore();
+                            }
                             return ListTile(
                               leading: Text(
                                 data[index]["name"],

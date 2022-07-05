@@ -1,4 +1,3 @@
-import 'package:bahaa_app/admin_panel/admin_panel.dart';
 import 'package:bahaa_app/translation/translation.dart';
 import 'package:bahaa_app/ui/base/intro.dart';
 import 'package:bahaa_app/ui/base/nav_bar.dart';
@@ -41,10 +40,6 @@ class _MyAppState extends State<MyApp> {
     } else {
       return const IntroScreen();
     }
-  }
-
-  Widget _adminPanel() {
-    return const AdminPanel();
   }
 
   @override

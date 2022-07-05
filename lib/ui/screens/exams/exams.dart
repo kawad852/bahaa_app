@@ -59,6 +59,9 @@ class ExamsScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
+                      if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                        snapshot.fetchMore();
+                      }
                       return ListTile(
                         onTap: () {
                           _launchUrl(data[index]["link"]);

@@ -11,14 +11,14 @@ class BaseDrawer extends StatelessWidget {
   const BaseDrawer({Key? key}) : super(key: key);
 
   static const _info = [
-    {
-      "title": "الرئيسية",
-      //TODO: fix color
-      "icon": MyIcons.home,
-    },
+    // {
+    //   "title": "الرئيسية",
+    //   //TODO: fix color
+    //   "icon": MyIcons.home,
+    // },
     {
       "title": "الطلاب الأوائل",
-      "icon": MyIcons.feedback,
+      "icon": MyIcons.medal,
     },
     {
       "title": "آراء الطلاب",
@@ -32,14 +32,14 @@ class BaseDrawer extends StatelessWidget {
       "title": "الأمتحانات المحوسبة",
       "icon": MyIcons.exam,
     },
-    {
-      "title": "تواصل معنا",
-      "icon": MyIcons.phone,
-    },
-    {
-      "title": "الشروط والأحكام",
-      "icon": MyIcons.security,
-    },
+    // {
+    //   "title": "تواصل معنا",
+    //   "icon": MyIcons.phone,
+    // },
+    // {
+    //   "title": "الشروط والأحكام",
+    //   "icon": MyIcons.security,
+    // },
   ];
 
   static const _social = [
@@ -107,28 +107,29 @@ class BaseDrawer extends StatelessWidget {
             final index = _info.indexOf(element);
             return ListTile(
               onTap: () {
+                Scaffold.of(context).closeDrawer();
                 switch (index) {
+                  // case 0:
+                  // {
+                  //   navBarController.index = 0;
+                  // }
+                  // break;
                   case 0:
-                    {
-                      navBarController.index = 0;
-                    }
-                    break;
-                  case 1:
                     {
                       navBarController.index = 1;
                     }
                     break;
-                  case 2:
+                  case 1:
                     {
                       navBarController.index = 2;
                     }
                     break;
-                  case 3:
+                  case 2:
                     {
                       navBarController.index = 3;
                     }
                     break;
-                  case 4:
+                  case 3:
                     {
                       navBarController.index = 4;
                     }

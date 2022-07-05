@@ -23,6 +23,7 @@ class TopStudentsScreen extends StatelessWidget {
                     ),
               ),
               FirestoreQueryBuilder<Map<String, dynamic>>(
+                // pageSize: 13,
                 query: _collection.orderBy("time", descending: true),
                 builder: (context, snapshot, _) {
                   if (snapshot.isFetching) {
@@ -46,6 +47,10 @@ class TopStudentsScreen extends StatelessWidget {
                       childAspectRatio: 0.8,
                     ),
                     itemBuilder: (context, index) {
+                      if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                        snapshot.fetchMore();
+                      }
+
                       return CustomStudentGradeBox(
                         name: data[index]["name"],
                         grade: data[index]["grade"],

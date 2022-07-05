@@ -48,6 +48,9 @@ class ReviewsPanel extends StatelessWidget {
                     itemCount: data.length,
                     separatorBuilder: (context, index) => const Divider(),
                     itemBuilder: (context, index) {
+                      if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                        snapshot.fetchMore();
+                      }
                       return Column(
                         children: [
                           ReviewBox(

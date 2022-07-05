@@ -10,7 +10,8 @@ import 'package:flutterfire_ui/firestore.dart';
 class SchoolsScreen extends StatelessWidget {
   const SchoolsScreen({Key? key}) : super(key: key);
 
-  static const String description = "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.";
+  static const String description =
+      "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.";
 
   static final _collection = FirebaseFirestore.instance.collection("schools");
 
@@ -53,6 +54,9 @@ class SchoolsScreen extends StatelessWidget {
                   endIndent: 20,
                 ),
                 itemBuilder: (context, index) {
+                  if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                    snapshot.fetchMore();
+                  }
                   return ListTile(
                     title: Text(
                       data[index]["name"],

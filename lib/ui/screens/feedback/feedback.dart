@@ -120,7 +120,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
               const SizedBox(height: 20),
               CustomTextField(
                 controller: nameCtrl,
-                height: 80,
+                height: 90,
                 hintText: "الإسم",
                 icon: chosenImage == null
                     ? FloatingActionButton(

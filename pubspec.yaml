@@ -107,9 +107,10 @@ flutter:
     - family: BalooBhaijaan
       fonts:
         - asset: assets/fonts/BalooBhaijaan2-Regular.ttf
-    - family: CustomIcon
+
+    - family: helneuar
       fonts:
-        - asset: assets/fonts/CustomIcon.ttf
+        - asset: assets/fonts/helneuar.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

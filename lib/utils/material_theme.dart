@@ -15,7 +15,7 @@ class AppThemeData {
           fontWeight: FontWeight.bold,
         ),
       ),
-      fontFamily: "BalooBhaijaan",
+      fontFamily: "helneuar",
       colorScheme: ColorScheme.fromSeed(
         seedColor: MyColors.primary,
         primary: MyColors.primary,

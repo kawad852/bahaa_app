@@ -36,7 +36,6 @@ class _CardScreenState extends State<CardScreen> {
     "معان",
     "عجلون",
     "الكرك",
-    "الكرك",
     "الرمثا",
     "الأغوار",
     "ماحص",
@@ -133,7 +132,7 @@ class _CardScreenState extends State<CardScreen> {
                 return Theme(
                   data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                   child: FirestoreQueryBuilder<Map<String, dynamic>>(
-                    query: _collection.doc(_cities[index]).collection("libraries"),
+                    query: _collection.doc(_cities[index]).collection("libraries").orderBy("time", descending: true),
                     builder: (context, snapshot, _) {
                       if (snapshot.isFetching) {
                         return _shimmer();
